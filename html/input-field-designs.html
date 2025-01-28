@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Character encoding for the document -->
+    <meta charset="UTF-8">
+
+    <!-- Viewport settings for responsive design -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Page description for SEO -->
+    <meta name="description" content="A demo showcasing input field designs.">
+
+    <!-- Keywords for SEO (optional) -->
+    <meta name="keywords" content="HTML, CSS, Input, Fields, Design">
+
+    <!-- Author information -->
+    <meta name="Yapphy" content="Yapphy">
+
+    <!-- Page title -->
+    <title>Input Field Designs</title>
+</head>
+<style>
+    html {
+        width: 100%;
+        height: 100%;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        font-family: sans-serif;
+        background: #555;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 30px;
+    }
+
+    input {
+        outline: 0;
+        font-size: 16px;
+    }
+
+    input::placeholder {
+        color: #aaa;
+    }
+
+    .input {
+        position: relative;
+    }
+
+    .input.design-0 input {
+        padding: 10px 15px;
+        color: #fff;
+        background: transparent;
+        border: 2px solid #aaa;
+        border-radius: 10px;
+        transition: 0.3s ease;
+    }
+
+    .input.design-0 input:focus {
+        border-color: #fff; 
+    }
+
+    .input.design-1 input {
+        padding: 10px 15px;
+        color: #fff;
+        background: transparent;
+        border: 0;
+        border-bottom: 2px solid #aaa;
+        border-radius: 0;
+        transition: 0.3s ease;
+    }
+
+    .input.design-1 input:focus {
+        border-color: #fff;
+    }
+
+    .input.design-2 input {
+        position: relative;
+        padding: 10px 15px;
+        color: #fff;
+        background: transparent;
+        border: 0;
+        border-bottom: 2px solid #aaa;
+        border-radius: 0;
+        z-index: 1;
+        transition: 0.2s ease;
+    }
+
+    .input.design-2 label {
+        padding: 0;
+        color: #aaa;
+        background: #555;
+        position: absolute;
+        top: 50%;
+
+        /* padding-left + border-left */
+        left: 15px;
+
+        transform: translateY(-50%);
+        z-index: 0;
+        transition: 0.2s ease;
+    }
+
+    .input.design-2 input:focus {
+        border-color: #fff;
+    }
+
+    .input.design-2 input:focus+label,
+    .input.design-2 input:valid+label {
+        padding: 0 0;
+        font-size: 10px;
+        color: #fff;
+        top: 0%;
+        left: 10px;
+        z-index: 1;
+    }
+
+    .input.design-3::after {
+        content: '';
+        display: block;
+        width: 0;
+        height: 2px;
+        background-color: #97ffff;
+        position: absolute;
+        bottom: 0;
+        box-shadow: 0 0 10px #e2ffff;
+        z-index: 1;
+        transition: 0.3s ease;
+    }
+
+    .input.design-3 input {
+        position: relative;
+        padding: 10px 15px;
+        color: #fff;
+        background: transparent;
+        border: 0;
+        border-bottom: 2px solid #aaa;
+        border-radius: 0;
+        z-index: 1;
+        transition: 0.2s ease;
+    }
+
+    .input.design-3 label {
+        padding: 0;
+        color: #aaa;
+        background: #555;
+        position: absolute;
+        top: 50%;
+
+        /* padding-left + border-left */
+        left: 15px;
+
+        transform: translateY(-50%);
+        z-index: 0;
+        transition: 0.2s ease;
+    }
+
+    .input.design-3 input:focus {
+        border-color: #fff;
+    }
+
+    .input.design-3:has(input:focus)::after {
+        width: 100%;
+    }
+
+    .input.design-3 input:focus+label,
+    .input.design-3 input:valid+label {
+        padding: 0 0;
+        font-size: 10px;
+        color: #fff;
+        top: 0%;
+        left: 10px;
+        z-index: 1;
+    }
+
+    .input.design-4 input {
+        padding: 10px 15px;
+        color: #fff;
+        background: transparent;
+        border: 2px solid #aaa; 
+        border-radius: 10px;
+        transition: 0.3s ease;
+    }
+
+    .input.design-4 input:focus {
+        border-color: #97ffff;
+        box-shadow: 0 0 10px #e2ffff;
+    }
+
+    .input.design-5 input {
+        position: relative;
+        padding: 10px 15px;
+        color: #fff;
+        background: transparent;
+        border: 2px solid #aaa;
+        border-radius: 10px;
+        z-index: 1;
+        transition: 0.2s ease;
+    }
+
+    .input.design-5 label {
+        padding: 0;
+        color: #aaa;
+        background: #555;
+        position: absolute;
+        top: 50%;
+
+        /* padding-left + border-left */
+        left: 17px;
+
+        transform: translateY(-50%);
+        z-index: 0;
+        transition: 0.2s ease;
+    }
+
+    .input.design-5 input:focus {
+        border-color: #fff;
+    }
+
+    .input.design-5 input:focus+label,
+    .input.design-5 input:valid+label {
+        padding: 0 5px;
+        font-size: 10px;
+        color: #fff;
+        top: 0%;
+        left: 12px;
+        z-index: 1;
+    }
+
+    .input.design-6 input {
+        position: relative;
+        padding: 10px 15px;
+        color: #fff;
+        background: transparent;
+        border: 2px solid #aaa;
+        border-radius: 10px;
+        z-index: 1;
+        transition: 0.2s ease;
+    }
+
+    .input.design-6 label {
+        padding: 0;
+        color: #aaa;
+        background: #555;
+        position: absolute;
+        top: 50%;
+
+        /* padding-left + border-left */
+        left: 17px;
+
+        transform: translateY(-50%);
+        border-radius: 5px;
+        z-index: 0;
+        transition: 0.2s ease;
+    }
+
+    .input.design-6 input:focus {
+        border-color: #97ffff;
+        box-shadow: 0 0 10px #e2ffff;
+    }
+
+    .input.design-6 input:focus+label,
+    .input.design-6 input:valid+label {
+        padding: 2px 5px;
+        font-size: 10px;
+        color: #555;
+        top: 0%;
+        left: 12px;
+        background: #97ffff;
+        z-index: 1;
+    }
+</style>
+
+<body>
+    <!-- Design Default -->
+    <div class="input design-0">
+        <input type="text" placeholder="Default Design">
+    </div>
+
+    <!-- Design 1 -->
+    <div class="input design-1">
+        <input type="text" placeholder="Underline">
+    </div>
+    
+    <!-- Design 2 -->
+    <div class="input design-2">
+        <!-- Must have required attribute to work for floating effect -->
+        <input type="text" required>
+        <label>Floating Label</label>
+    </div>
+
+    <!-- Design 3 -->
+    <div class="input design-3">
+        <!-- Must have required attribute to work for floating effect -->
+        <input type="text" required>
+        <label>Glowing Underline</label>
+    </div>
+
+    <!-- Design 4 -->
+    <div class="input design-4">
+        <input type="text" placeholder="Glowing Border">
+    </div>
+
+    <!-- Design 5 -->
+    <div class="input design-5">
+        <input type="text" required>
+        <label>Floating Label</label>
+    </div>
+
+    <!-- Design 6 -->
+    <div class="input design-6">
+        <!-- Must have required attribute to work for floating effect -->
+        <input type="text" required>
+        <label>Floating Label + Lights</label>
+    </div>
+</body>
+
+</html>
