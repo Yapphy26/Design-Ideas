@@ -4,3 +4,4 @@ Let's build a better UI/UX.
 
 ## Pure HTML and CSS
 1. [Animated Gradient Color Button](html/animated-gradient-color-button.html)
+2. [Input Field Designs](html/animated-gradient-color-button.html), will add new designs over time
