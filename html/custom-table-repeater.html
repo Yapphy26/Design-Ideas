@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Character encoding for the document -->
+    <meta charset="UTF-8">
+
+    <!-- Viewport settings for responsive design -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Page description for SEO -->
+    <meta name="description" content="A demo showcasing a breadcrumb trail.">
+
+    <!-- Keywords for SEO (optional) -->
+    <meta name="keywords" content="HTML, CSS, JavaScript, jQuery, Breadcrumb Trail">
+
+    <!-- Author information -->
+    <meta name="Yapphy" content="Yapphy">
+
+    <!-- Page title -->
+    <title>Breadcrumb Trail</title>
+
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+    <!-- jQuery UI CDN -->
+    <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.min.js"
+        integrity="sha256-AlTido85uXPlSyyaZNsjJXeCs07eSv3r43kyCVc8ChI=" crossorigin="anonymous"></script>
+</head>
+<style>
+    html {
+        width: 100%;
+        height: 100%;
+    }
+
+    body {
+        margin: 0;
+        padding: 20px 10px;
+        font-family: sans-serif;
+        color: #fff;
+        background: #555;
+    }
+
+    h1 {
+        margin: 0 0 20px;
+    }
+
+    h2 {
+        margin: 0 0 15px;
+    }
+
+    pre {
+        margin: 0;
+    }
+
+    #form {
+        max-width: 720px;
+        margin: 0 0 10px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    td,
+    th {
+        background: #555;
+        border: 1px solid #fff;
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr {
+        min-height: 75px;
+    }
+
+    input,
+    select {
+        width: 100%;
+        padding: 10px 15px;
+        color: #fff;
+        outline: 0;
+        font-size: 16px;
+        background: transparent;
+        border: 2px solid #aaa;
+        border-radius: 10px;
+        transition: 0.3s ease;
+    }
+
+    input::placeholder {
+        color: #aaa;
+    }
+
+    input:focus,
+    select:focus {
+        border-color: #fff;
+    }
+
+    .input-wrapper {
+        display: flex;
+    }
+
+    .table-data.actions {
+        position: relative;
+    }
+
+    .table-data.actions .action-button {
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .table-data.actions .action-button:nth-child(1) {
+        top: 0;
+    }
+
+    .table-data.actions .action-button:nth-child(2) {
+        top: 50%;
+    }
+
+    .table-data.actions .action-button button {
+        position: relative;
+        overflow: hidden;
+        color: #21253e;
+        font-weight: 600;
+        width: 25px;
+        height: 25px;
+        background: #eee;
+        border: none;
+        outline: none;
+        border-radius: 100%;
+        display: block;
+        cursor: pointer;
+        transition: 0.3s ease;
+    }
+
+    .action-button {
+        display: flex;
+        justify-content: end;
+    }
+
+    .action-button.last-row button,
+    .action-button button.submit {
+        float: right;
+        position: relative;
+        overflow: hidden;
+        color: #21253e;
+        font-weight: 600;
+        padding: 8px 30px 7px;
+        background: #eee;
+        border: none;
+        outline: none;
+        border-radius: 10px;
+        display: block;
+        cursor: pointer;
+        transition: 0.3s ease;
+    }
+
+    .action-button button.submit {
+        float: none;
+        margin: 10px 8px;
+    }
+
+    .action-button button:hover {
+        background: #aaa;
+    }
+
+    .breadcrumbs span {
+        color: #fff;
+    }
+
+    .breadcrumbs span::after {
+        content: '>';
+        padding: 0 10px;
+    }
+
+    .breadcrumbs span:last-child:after {
+        display: none;
+    }
+</style>
+
+<body>
+    <h1>Form</h1>
+    <form id="form" action="">
+        <table class="table">
+            <tr class="titles non-draggable">
+                <th style="width: 10%;">No</th>
+                <th style="width: 35%;">Name</th>
+                <th style="width: 35%;">Email</th>
+                <th style="width: 10%;">Order</th>
+                <th style="width: 10%;"></th>
+            </tr>
+            <tr class="fields">
+                <td style="width: 10%;" class="table-data index">1</td>
+                <td style="width: 35%;" class="table-data">
+                    <div class="input-wrapper">
+                        <input type="text" id="form-1-name" name="form[1][name]" placeholder="Name">
+                    </div>
+                </td>
+                <td style="width: 35%;" class="table-data">
+                    <div class="input-wrapper">
+                        <input type="text" id="form-1-email" name="form[1][email]" placeholder="Email">
+                    </div>
+                </td>
+                <td style="width: 10%;" class="table-data sort-order">
+                    <div class="input-wrapper">
+                        <input type="text" readonly id="form-1-sort_order" name="form[1][sort_order]" value="1">
+                    </div>
+                </td>
+                <td style="width: 10%;" class="table-data actions">
+                    <div class="action-button">
+                        <button type="button" class="add-row">+</button>
+                    </div>
+                    <div class="action-button">
+                        <button type="button" class="remove-row">-</button>
+                    </div>
+                </td>
+            </tr>
+            <tr class="non-draggable">
+                <td colspan="5">
+                    <div class="action-button last-row">
+                        <button type="button" class="add-row">ADD</button>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <div class="action-button">
+            <button type="submit" class="submit">SUBMIT</button>
+        </div>
+    </form>
+
+    <h2>Output: </h2>
+    <pre class="output"></pre>
+
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+
+            function updateNumCol(start, end) {
+                for (let i = start - 1; i < end; i++) {
+                    jQuery('#form table.table .table-data.index').eq(i).text(i + 1);
+                }
+            }
+
+            function updateSortOrder(start, end) {
+                for (let i = start - 1; i < end; i++) {
+                    jQuery('#form table.table .table-data.sort-order').eq(i).find('input').val(i + 1);
+                }
+            }
+
+            let fields = jQuery('.fields').html();
+            let rows = jQuery('#form table.table .fields');
+            let index = rows.length;
+
+            jQuery('.last-row .add-row').on('click', function () {
+                index++;
+
+                let new_fields = fields.replace(/\[[0-9]+\]/g, function () {
+                    // Increase the number inside the square brackets
+                    return '[' + index + ']';
+                }).replace(/\-[0-9]+\-/g, function () {
+                    // Increase the number inside the id attribute
+                    return '-' + index + '-';
+                }).replace(/<td class="table-data index">(\d+)<\/td>/g, function (match, number) {
+                    // Match a table cell `<td>` with class "table-data index" that contains a number
+                    // Remove the number inside the `<td>` but keep the structure
+                    return '<td class="table-data index"></td>';
+                });
+
+                jQuery(this).parent().parent().parent().prev().after('<tr class="fields new">' + new_fields + '</tr>');
+
+                let start = (jQuery('#form table.table .fields').length - 1);
+                let end = index;
+
+                updateNumCol(start, end);
+                updateSortOrder(start, end);
+            });
+
+            jQuery('#form table.table').on('click', '.table-data.actions .action-button button', function (e) {
+
+                if (jQuery(this).hasClass('remove-row')) {
+                    // Remove row on remove row button click
+                    jQuery(this).closest('tr').attr('name');
+                    jQuery(this).closest('tr').remove();
+                } else if (jQuery(this).hasClass('add-row')) {
+                    // Clone and add new row on add row button click 
+                    index++;
+
+                    let new_fields = fields.replace(/\[[0-9]+\]/g, function () {
+                        // Increase the number inside the square brackets
+                        return '[' + index + ']';
+                    }).replace(/\-[0-9]+\-/g, function () {
+                        // Increase the number inside the id attribute
+                        return '-' + index + '-';
+                    }).replace(/<td class="table-data index">(\d+)<\/td>/g, function (match, number) {
+                        // Match a table cell `<td>` with class "table-data index" that contains a number
+                        // Remove the number inside the `<td>` but keep the structure
+                        return '<td class="table-data index"></td>';
+                    });
+
+                    jQuery(this).parent().parent().parent().before('<tr class="fields new">' + new_fields + '</tr>');
+
+                    let added_row_index = jQuery(this).parent().parent().index() - 1;
+                    // updateDataIndex('#form table.table input');
+                    // jQuery("#form table.table input").eq(added_row_index).val('');
+                }
+
+                let start = jQuery(this).parent().parent().parent(".fields").index() - 1;
+                let end = jQuery('#form table.table .fields').length;
+
+                updateNumCol(start, end);
+                updateSortOrder(start, end);
+            });
+
+            let start = 0;
+            let end = 0;
+
+            jQuery("#form table.table tbody").sortable({
+                placeholder: "ui-state-highlight",
+                items: "tr:not(.non-draggable)",  // Ensure only non-draggable rows are excluded
+                start: function (event, ui) {
+                    start = ui.item.index();
+                    ui.item.next().css("height", ui.item.height());
+                },
+                stop: function (event, ui) {
+                    end = ui.item.index();
+                    if (start > end) {
+                        // Swap the values of start and end, so I can reuse the function
+                        start = end + start;
+                        end = start - end;
+                        start = start - end;
+                    }
+
+                    updateNumCol(start, end);
+                    updateSortOrder(start, end);
+                }
+            });
+
+            jQuery('#form button[type="submit"]').on('click', function (e) {
+                e.preventDefault();
+
+                let form_data = [];
+
+                jQuery('#form table.table .fields').each(function () {
+                    let row_data = {};
+                    jQuery(this).find('input').each(function () {
+                        let id = jQuery(this).attr('name').split(/[\[\]]+/)[1];
+                        let name_attr = jQuery(this).attr('name').split(/[\[\]]+/)[2];
+                        let value = jQuery(this).val();
+                        row_data['id'] = id;
+                        row_data[name_attr] = value;
+                    });
+                    form_data.push(row_data);
+                });
+
+                let json_output = JSON.stringify(form_data, null, 2);
+
+                // Display the JSON output
+                $('.output').text(json_output);
+            });
+        });
+    </script>
+</body>
+
+</html>
