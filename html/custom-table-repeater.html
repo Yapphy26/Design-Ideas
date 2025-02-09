@@ -236,14 +236,14 @@
                 }
             }
 
-            let fields = jQuery('.fields').html();
+            let fields_html = jQuery('.fields').html();
             let rows = jQuery('#form table.table .fields');
-            let index = rows.length;
+            let index = jQuery('#form .table .fields').length;
 
             jQuery('.last-row .add-row').on('click', function () {
                 index++;
 
-                let new_fields = fields.replace(/\[[0-9]+\]/g, function () {
+                let new_fields = fields_html.replace(/\[[0-9]+\]/g, function () {
                     // Increase the number inside the square brackets
                     return '[' + index + ']';
                 }).replace(/\-[0-9]+\-/g, function () {
@@ -268,13 +268,12 @@
 
                 if (jQuery(this).hasClass('remove-row')) {
                     // Remove row on remove row button click
-                    jQuery(this).closest('tr').attr('name');
                     jQuery(this).closest('tr').remove();
                 } else if (jQuery(this).hasClass('add-row')) {
                     // Clone and add new row on add row button click 
                     index++;
 
-                    let new_fields = fields.replace(/\[[0-9]+\]/g, function () {
+                    let new_fields = fields_html.replace(/\[[0-9]+\]/g, function () {
                         // Increase the number inside the square brackets
                         return '[' + index + ']';
                     }).replace(/\-[0-9]+\-/g, function () {
@@ -287,10 +286,6 @@
                     });
 
                     jQuery(this).parent().parent().parent().before('<tr class="fields new">' + new_fields + '</tr>');
-
-                    let added_row_index = jQuery(this).parent().parent().index() - 1;
-                    // updateDataIndex('#form table.table input');
-                    // jQuery("#form table.table input").eq(added_row_index).val('');
                 }
 
                 let start = jQuery(this).parent().parent().parent(".fields").index() - 1;
@@ -344,7 +339,7 @@
                 let json_output = JSON.stringify(form_data, null, 2);
 
                 // Display the JSON output
-                $('.output').text(json_output);
+                jQuery('.output').text(json_output);
             });
         });
     </script>
